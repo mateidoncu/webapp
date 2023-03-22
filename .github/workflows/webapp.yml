@@ -13,8 +13,8 @@ jobs:
         az group create --name myResourceGroup --location westeurope
     - name: Create SQL Database
       run: |
-        az sql server create --name mySqlServer --resource-group myResourceGroup --location westeurope --admin-user mateidoncu --admin-password 0P4r0l4S3cr3t4
-        az sql db create --name mySqlDatabase --resource-group myResourceGroup --server mySqlServer --service-objective S0
+        az sql server create --name mySqlServerHW --resource-group myResourceGroup --location westeurope --admin-user mateidoncu --admin-password 0P4r0l4S3cr3t4
+        az sql db create --name mySqlDatabaseHW --resource-group myResourceGroup --server mySqlServerHW --service-objective S0
     - name: Create Web App
       run: |
         az appservice plan create --name myAppServicePlan --resource-group myResourceGroup --sku F1 --location westeurope
