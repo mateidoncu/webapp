@@ -18,14 +18,14 @@ jobs:
     - name: Create Web App
       run: |
         az appservice plan create --name myAppServicePlan --resource-group myResourceGroup --sku F1 --location westeurope
-        az webapp create --name myWebApp --plan myAppServicePlan --resource-group myResourceGroup --runtime "DOTNET|5.0"
+        az webapp create --name myWebAppHW --plan myAppServicePlan --resource-group myResourceGroup --runtime "DOTNET|5.0"
     - name: Create Autoscale Setting
       run: |
-        az monitor autoscale create --name myAutoscaleSetting --resource-group myResourceGroup --resource-id /subscriptions/<subscription-id>/resourceGroups/myResourceGroup/providers/Microsoft.Web/sites/myWebApp --location westeurope --count 1 --time-grain 1m --min-count 1 --max-count 10
+        az monitor autoscale create --name myAutoscaleSetting --resource-group myResourceGroup --resource-id /subscriptions/<subscription-id>/resourceGroups/myResourceGroup/providers/Microsoft.Web/sites/myWebAppHW --location westeurope --count 1 --time-grain 1m --min-count 1 --max-count 10
     - name: Create Alert Rule
       run: |
-        az monitor metrics alert create --name myAlertRule --resource-group myResourceGroup --resource /subscriptions/<subscription-id>/resourceGroups/myResourceGroup/providers/Microsoft.Web/sites/myWebApp --condition "Percentage CPU > 80" --description "CPU usage is high" --action email@example.com
+        az monitor metrics alert create --name myAlertRule --resource-group myResourceGroup --resource /subscriptions/<subscription-id>/resourceGroups/myResourceGroup/providers/Microsoft.Web/sites/myWebAppHW --condition "Percentage CPU > 80" --description "CPU usage is high" --action email@example.com
     - name: Create App Insights
       run: |
         az monitor app-insights component create --app myAppInsights --resource-group myResourceGroup --location westeurope
-        az webapp config appsettings set --name myWebApp --resource-group myResourceGroup --settings "APPINSIGHTS_INSTRUMENTATIONKEY=<instrumentation-key>"
+        az webapp config appsettings set --name myWebAppHW --resource-group myResourceGroup --settings "APPINSIGHTS_INSTRUMENTATIONKEY=<instrumentation-key>"
