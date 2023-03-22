@@ -25,6 +25,7 @@ jobs:
     - name: Create Alert Rule
       run: |
         az monitor metrics alert create --name myAlertRule --resource-group myResourceGroup --resource /subscriptions/<subscription-id>/resourceGroups/myResourceGroup/providers/Microsoft.Web/sites/myWebAppHW --condition "Percentage CPU > 80" --description "CPU usage is high" --action doncumatei@yahoo.com
+    - name: Create App Insights
       run: |
         az monitor app-insights component create --app myAppInsights --resource-group myResourceGroup --location westeurope
         az webapp config appsettings set --name myWebAppHW --resource-group myResourceGroup --settings "APPINSIGHTS_INSTRUMENTATIONKEY=<instrumentation-key>"
