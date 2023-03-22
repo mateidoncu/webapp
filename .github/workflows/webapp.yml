@@ -18,7 +18,7 @@ jobs:
     - name: Create Web App
       run: |
         az appservice plan create --name myAppServicePlan --resource-group myResourceGroup --sku F1 --location westeurope
-        az webapp create --name myWebAppHW --plan myAppServicePlan --resource-group myResourceGroup --runtime "DOTNET|7.0"
+        az webapp create --name myWebAppHW --plan myAppServicePlan --resource-group myResourceGroup --runtime "node|18.0"
     - name: Create Autoscale Setting
       run: |
         az monitor autoscale create --name myAutoscaleSetting --resource-group myResourceGroup --resource-id /subscriptions/<subscription-id>/resourceGroups/myResourceGroup/providers/Microsoft.Web/sites/myWebAppHW --location westeurope --count 1 --time-grain 1m --min-count 1 --max-count 10
