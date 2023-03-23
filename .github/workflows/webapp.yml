@@ -21,7 +21,7 @@ jobs:
         az webapp create --name myWebAppHW --plan myAppServicePlan --resource-group myResourceGroup
     - name: Create Autoscale Setting
       run: |
-        az monitor autoscale create --name myAutoscaleSetting --resource-group myResourceGroup --resource /subscriptions/d88d55f2-1edf-4ccb-9721-9946addbeec7/resourceGroups/myResourceGroup/providers/Microsoft.Web/sites/myWebAppHW --location westeurope --min-count 1 --max-count 10 --count 1 --email-administrator doncumatei@yahoo.com --operator GreaterThan --metric "Percentage CPU" --threshold 80
+        az monitor autoscale create --name myAutoscaleSetting --resource-group myResourceGroup --resource /subscriptions/d88d55f2-1edf-4ccb-9721-9946addbeec7/resourceGroups/myResourceGroup/providers/Microsoft.Web/sites/myWebAppHW --location westeurope --min-count 1 --max-count 10 --count 1 --email-administrator false --operator GreaterThan --metric "Percentage CPU" --threshold 80
 
     - name: Create Alert Rule
       run: |
