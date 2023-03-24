@@ -21,10 +21,10 @@ jobs:
         az webapp create --name myWebAppHW --plan myAppServicePlan --resource-group myResourceGroup
     - name: Create Autoscale Setting
       run: |
-         az monitor autoscale create --name MyAutoScale --resource-group myResourceGroup --resource myAppServicePlan --min-count 1 --max-count 4 --count 1 --email-administrator --resource-type Microsoft.Web/serverfarms
+         az monitor autoscale create --resource-group myResourceGroup --resource myAppServicePlan --min-count 1 --max-count 4 --count 1 --email-administrator --resource-type Microsoft.Web/serverfarms
     - name: Create Autoscale Rule
       run: |
-        az monitor autoscale rule create --resource-group myResourceGroup --resource myAppServicePlan --resource-type Microsoft.Web/serverfarms --autoscale-name MyAutoScale --condition "Requests >= 200 avg 5m" --scale out 2
+        az monitor autoscale rule create --resource-group myResourceGroup --resource myAppServicePlan --resource-type Microsoft.Web/serverfarms --autoscale-name myAppServicePlan --condition "Requests >= 200 avg 5m" --scale out 2
     - name: Create Alert Rule
       run: |
         az monitor metrics alert create --name myAlertRule --resource-group myResourceGroup --resource /subscriptions/<subscription-id>/resourceGroups/myResourceGroup/providers/Microsoft.Web/sites/myWebAppHW --condition "Percentage CPU > 80" --description "CPU usage is high" --action doncumatei@yahoo.com
