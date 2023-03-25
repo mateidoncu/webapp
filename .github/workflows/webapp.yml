@@ -24,43 +24,7 @@ jobs:
          az monitor autoscale create --resource-group myResourceGroup --resource myAppServicePlan --min-count 1 --max-count 4 --count 1 --email-administrator --resource-type Microsoft.Web/serverfarms
     - name: Create Autoscale Rule
       run: |
-        az monitor autoscale create --name myAppServicePlan --resource-group myResourceGroup --location "West Europe" --autoscale-name myAppServicePlan --parameters '{
-          "profiles": [
-                {
-                  "name": "Auto created default scale condition",
-                  "capacity": {
-                    "minimum": "1",
-                    "maximum": "1",
-                    "default": "1"
-                },
-                  "rules": [
-                {
-                    "scaleAction": {
-                        "direction": "Decrease",
-                        "type": "ChangeCount",
-                        "value": "1",
-                        "cooldown": "PT5M"
-                    },
-                    "metricTrigger": {
-                        "metricName": "CpuPercentage",
-                        "metricNamespace": "microsoft.web/serverfarms",
-                        "metricResourceUri": "/subscriptions/d88d55f2-1edf-4ccb-9721-9946addbeec7/resourceGroups/myResourceGroup/providers/Microsoft.Web/serverFarms/myAppServicePlan",
-                        "operator": "LessThan",
-                        "statistic": "Average",
-                        "threshold": 20,
-                        "timeAggregation": "Average",
-                        "timeGrain": "PT1M",
-                        "timeWindow": "PT10M",
-                        "dimensions": [],
-                        "dividePerInstance": false
-                    }
-                }
-            ],
-            "useAndAsScaleOutLogicalOperator": false
-                }
-            ],
-          "notifications": []
-                                }'
+        az monitor autoscale rule create --resource-group myResourceGroup --autoscale-name myAutoScale --scale to 5 --condition "Percentage CPU > 75 avg 10m"
     - name: Create Alert Rule
       run: |
         az monitor metrics alert create --name myAlertRule --resource-group myResourceGroup --resource /subscriptions/<subscription-id>/resourceGroups/myResourceGroup/providers/Microsoft.Web/sites/myWebAppHW --condition "Percentage CPU > 80" --description "CPU usage is high" --action doncumatei@yahoo.com
