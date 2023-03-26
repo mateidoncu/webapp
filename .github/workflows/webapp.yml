@@ -33,3 +33,7 @@ jobs:
         az config set extension.use_dynamic_install=yes_without_prompt
         az monitor app-insights component create --app myAppInsights --resource-group myResourceGroup --location westeurope
         az webapp config appsettings set --name myWebAppHW --resource-group myResourceGroup --settings "APPINSIGHTS_INSTRUMENTATIONKEY=<instrumentation-key>"
+    - name: Deploy Static HTML to Web App
+      run: |
+        cd wwwroot
+        az webapp up --name myWebAppHW --resource-group myResourceGroup
