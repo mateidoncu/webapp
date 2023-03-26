@@ -31,5 +31,4 @@ jobs:
     - name: Create App Insights
       run: |
         az monitor app-insights component create --app myAppInsights --resource-group myResourceGroup --location westeurope
-        az config set extension.use_dynamic_install=yes_without_prompt
         az webapp config appsettings set --name myWebAppHW --resource-group myResourceGroup --settings "APPINSIGHTS_INSTRUMENTATIONKEY=<instrumentation-key>"
