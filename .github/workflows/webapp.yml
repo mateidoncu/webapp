@@ -24,7 +24,7 @@ jobs:
          az monitor autoscale create --resource-group myResourceGroup --resource myAppServicePlan --min-count 1 --max-count 4 --count 1 --email-administrator --resource-type Microsoft.Web/serverfarms
     - name: Create Autoscale Rule
       run: |
-        az monitor autoscale rule create --resource-group myResourceGroup --autoscale-name myAppServicePlan --metric "CpuPercentage" --operator GreaterThan --threshold 70 --time-grain 5m --scale out 3 --condition "AppServicePlan Standard Metrics/CpuPercentage GreaterThan 70 avg 5m"
+        az monitor autoscale rule create --resource-group myResourceGroup --autoscale-name myAppServicePlan --scale in 1 --condition "CpuPercentage <= 40 avg 10m"
     - name: Create Alert Rule
       run: |
         az monitor metrics alert create --name myAlertRule --resource-group myResourceGroup --resource /subscriptions/<subscription-id>/resourceGroups/myResourceGroup/providers/Microsoft.Web/sites/myWebAppHW --condition "Percentage CPU > 80" --description "CPU usage is high" --action doncumatei@yahoo.com
