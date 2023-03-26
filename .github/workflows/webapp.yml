@@ -27,7 +27,7 @@ jobs:
         az monitor autoscale rule create --resource-group myResourceGroup --autoscale-name myAppServicePlan --scale in 1 --condition "CpuPercentage <= 40 avg 10m"
     - name: Create Alert Rule
       run: |
-        az monitor metrics alert create --name myAlert --resource-group myResourceGroup --scopes d88d55f2-1edf-4ccb-9721-9946addbeec7 --condition "avg CpuPercentage > 80" --description "Alert when CPU usage is over 80%"
+        az monitor metrics alert create --name myAlert --resource-group myResourceGroup --scopes myAppServicePlan --condition "avg CpuPercentage > 80" --description "Alert when CPU usage is over 80%"
     - name: Create App Insights
       run: |
         az monitor app-insights component create --app myAppInsights --resource-group myResourceGroup --location westeurope
