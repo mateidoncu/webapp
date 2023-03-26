@@ -30,5 +30,6 @@ jobs:
         az monitor metrics alert create --name myAlert --resource-group myResourceGroup --scopes /subscriptions/d88d55f2-1edf-4ccb-9721-9946addbeec7/resourceGroups/myResourceGroup/providers/Microsoft.Web/serverfarms/myAppServicePlan --condition "avg CpuPercentage > 80" --description "Alert when CPU usage is over 80%"
     - name: Create App Insights
       run: |
+        az config set extension.use_dynamic_install=yes_without_prompt
         az monitor app-insights component create --app myAppInsights --resource-group myResourceGroup --location westeurope
         az webapp config appsettings set --name myWebAppHW --resource-group myResourceGroup --settings "APPINSIGHTS_INSTRUMENTATIONKEY=<instrumentation-key>"
