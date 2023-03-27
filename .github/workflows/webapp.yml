@@ -33,3 +33,9 @@ jobs:
         az config set extension.use_dynamic_install=yes_without_prompt
         az monitor app-insights component create --app myAppInsights --resource-group myResourceGroup --location westeurope
         az webapp config appsettings set --name myWebAppHW --resource-group myResourceGroup --settings "APPINSIGHTS_INSTRUMENTATIONKEY=<instrumentation-key>"
+    - name: Deploy to Web App
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: myWebAppHW
+        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+        package: ./wwwroot
