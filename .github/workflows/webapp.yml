@@ -33,28 +33,4 @@ jobs:
         az config set extension.use_dynamic_install=yes_without_prompt
         az monitor app-insights component create --app myAppInsights --resource-group myResourceGroup --location westeurope
         az webapp config appsettings set --name myWebAppHW --resource-group myResourceGroup --settings "APPINSIGHTS_INSTRUMENTATIONKEY=<instrumentation-key>"
-    - name: Build And Deploy
-      id: builddeploy
-      uses: Azure/login@v1
-      with:
-        azure_static_web_apps_api_token: ${{ secrets.AZURE_CREDENTIALS }}
-        repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for Github integrations (i.e. PR comments)
-        action: "upload"
-        ###### Repository/Build Configurations - These values can be configured to match your app requirements. ######
-        # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
-        app_location: "/wwwroot" # App source code path
-        api_location: "" # Api source code path - optional
-        output_location: "/" # Built app content directory - optional
-        ###### End of Repository/Build Configurations ######
-
-  close_pull_request_job:
-    if: github.event_name == 'pull_request' && github.event.action == 'closed'
-    runs-on: ubuntu-latest
-    name: Close Pull Request Job
-    steps:
-      - name: Close Pull Request
-        id: closepullrequest
-        uses: Azure/login@v1
-        with:
-          azure_static_web_apps_api_token: ${{ secrets.AZURE_CREDENTIALS }}
-          action: "close"
+  
